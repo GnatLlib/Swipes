@@ -1,0 +1,42 @@
+<html>
+<body>
+<p>
+    Welcome to the {{title}}
+</p>
+ <p>
+   <ul>
+   {% if user and not user.is_anonymous %}
+     <li>
+       <a>Hello {{ user.get_full_name|default:user.username }}!</a>
+     </li>
+     <li>
+       <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
+     </li>
+    <li>
+        <a href = "/create">Create</a>
+    </li>
+   {% else %}
+     <li>
+       <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Login with Facebook</a>
+     </li>
+   {% endif %}
+   </ul>
+ </p>
+
+    {%for i in list%}
+<p>
+    {{i.seller_name}}
+    {{i.timestamp}}
+    {{i.user}}
+    {{i.price}}
+    {{i.phone}}
+    {{i.id}}
+    {%if request.user == i.user%}
+    <a href = "/delete/{{i.id}}">Delete</a>
+    {%endif%}
+</p>
+    {%endfor%}
+
+{{form.as_p}}
+</body>
+</html>
