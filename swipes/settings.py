@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'selling',
     'social.apps.django_app.default',
+    'rest_framework',
 ]
 AUTHENTICATION_BACKENDS = (
     'social.backends.facebook.FacebookOAuth2',

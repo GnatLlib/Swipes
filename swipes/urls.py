@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from selling import views
-
+from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -26,4 +26,9 @@ urlpatterns = [
     url(r'^delete/(?P<id>\d+)/$', views.delete_post, name="delete"),
     url('', include('social.apps.django_app.urls', namespace='social')),
     url('', include('django.contrib.auth.urls', namespace='auth')),
+    url(r'^api/posts$', views.PostList.as_view()),
+    url(r'^api/posts/(?P<pk>\d+)$', views.PostDetail.as_view()),
+
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
