@@ -1,11 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post
+from .models import Post, PostDate
 from .forms import PostForm
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import PostSerializer
+from .serializers import PostSerializer, PostDateSerializer
 from rest_framework import generics
 
 
@@ -57,7 +57,12 @@ class PostList(APIView):
 #Using generic API classes
 
 
-class PostDetail(generics.RetrieveAPIView):
+class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+
+class PostDelete(generics.DestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
@@ -65,3 +70,12 @@ class PostDetail(generics.RetrieveAPIView):
 class PostList(generics.ListAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+
+class PostDateList(generics.ListAPIView):
+    queryset = PostDate.objects.all()
+    serializer_class = PostDateSerializer
+
+
+
+

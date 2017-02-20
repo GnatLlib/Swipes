@@ -8,5 +8,11 @@ class PostForm(forms.ModelForm):
         fields = [
             "seller_name",
             "price",
-            "phone"
+            "phone",
+            "De_Neve",
+            "Feast",
+            "Bplate",
+            "Covel",
+
+
         ]

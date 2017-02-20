@@ -28,6 +28,7 @@ urlpatterns = [
     url('', include('django.contrib.auth.urls', namespace='auth')),
     url(r'^api/posts$', views.PostList.as_view()),
     url(r'^api/posts/(?P<pk>\d+)$', views.PostDetail.as_view()),
+    url(r'^api/postdates$', views.PostDateList.as_view()),
 
 ]
 
