@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from selling import views
 from rest_framework.urlpatterns import format_suffix_patterns
+from rest_framework_jwt.views import obtain_jwt_token
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -29,6 +30,8 @@ urlpatterns = [
     url(r'^api/posts$', views.PostList.as_view()),
     url(r'^api/posts/(?P<pk>\d+)$', views.PostDetail.as_view()),
     url(r'^api/postdates$', views.PostDateList.as_view()),
+    url(r'^api/postdates/(?P<pk>\d+)$', views.PostDateDetail.as_view()),
+    url(r'^api-token-auth/', obtain_jwt_token),
 
 ]
 

@@ -14,6 +14,9 @@ class Post(models.Model):
     Bplate = models.BooleanField()
     Covel = models.BooleanField()
 
+    def __str__(self):
+        return self.seller_name + ' ' + str(self.phone)
+
 
 class PostDate(models.Model):
     post = models.ForeignKey('Post')

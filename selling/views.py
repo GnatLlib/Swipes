@@ -5,6 +5,7 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework import permissions
 from .serializers import PostSerializer, PostDateSerializer
 from rest_framework import generics
 
@@ -58,6 +59,7 @@ class PostList(APIView):
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
@@ -68,11 +70,19 @@ class PostDelete(generics.DestroyAPIView):
 
 
 class PostList(generics.ListAPIView):
+    permission_classes = (permissions.AllowAny,)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
 
-class PostDateList(generics.ListAPIView):
+class PostDateList(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = PostDate.objects.all()
+    serializer_class = PostDateSerializer
+
+
+class PostDateDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = PostDate.objects.all()
     serializer_class = PostDateSerializer
 
