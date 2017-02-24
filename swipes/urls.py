@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^api/postdates$', views.PostDateList.as_view()),
     url(r'^api/postdates/(?P<pk>\d+)$', views.PostDateDetail.as_view()),
     url(r'^api-token-auth/', obtain_jwt_token),
+    url(r'^api/createuser$', views.CreateUserView.as_view()),
 
 ]
 

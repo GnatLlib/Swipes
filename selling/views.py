@@ -6,10 +6,13 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
-from .serializers import PostSerializer, PostDateSerializer
+from .serializers import PostSerializer, PostDateSerializer, UserSerializer
 from rest_framework import generics
+from django.contrib.auth import get_user_model
 
 
+
+# ///////////////////////////////////// VIEWS FOR TESTING PURPOSES \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 def index(request):
     all_posts = Post.objects.all()
 
@@ -55,7 +58,9 @@ class PostList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 '''
-#Using generic API classes
+
+# ///////////////////////////REST API IMPLEMENTATION HERE\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Using generic API classes
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -86,6 +91,13 @@ class PostDateDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = PostDate.objects.all()
     serializer_class = PostDateSerializer
 
+# //////////////////////// USER CREATION API \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+class CreateUserView(generics.CreateAPIView):
+    model = get_user_model()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = UserSerializer
 
 
 

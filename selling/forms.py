@@ -1,7 +1,7 @@
 from django import forms
 from .models import Post
 
-
+# Note: Form only for testing purposes
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
